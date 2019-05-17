@@ -1,8 +1,13 @@
 
 package com.landmark.assignment.view;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,14 +15,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.landmark.assignment.R;
+import com.landmark.assignment.helpers.ConfigHelper;
+import com.landmark.assignment.services.DownloadConfigService;
 import com.landmark.assignment.viewmodel.DataViewModel;
 import com.landmark.assignment.databinding.ActivityMainBinding;
+
+import org.json.JSONException;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 
 public class MainActivity extends AppCompatActivity {
     private DataViewModel dataViewModel;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            dataViewModel.setUp();
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +46,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        dataViewModel.setUp();
+        if (ConfigHelper.getConfig() == null) {
+            if (!DownloadConfigService.isIntentServiceRunning) {
+                Intent servIntent = new Intent(this, DownloadConfigService.class);
+                servIntent.putExtra("messenger", new Messenger(handler));
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(servIntent);
+                } else {
+                    startService(servIntent);
+                }
+            }
+        }
     }
 
     @Override

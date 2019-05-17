@@ -5,26 +5,32 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.text.TextUtils;
 
-import com.landmark.assignment.model.DataModel;
-
+import com.landmark.assignment.model.ProductModel;
 
 public class DataItemViewModel extends BaseObservable {
-    private DataModel dataModel;
+    private ProductModel productModel;
 
-    public DataItemViewModel(DataModel dataModel) {
-        this.dataModel = dataModel;
-    }
-
-    public void setUp() {
-        // perform set up tasks, such as adding listeners
-    }
-
-    public void tearDown() {
-        // perform tear down tasks, such as removing listeners
+    public DataItemViewModel(ProductModel dataModel) {
+        this.productModel = dataModel;
     }
 
     @Bindable
     public String getTitle() {
-        return !TextUtils.isEmpty(dataModel.getTitle()) ? dataModel.getTitle() : "";
+        return !TextUtils.isEmpty(productModel.getName()) ? productModel.getName() : "";
+    }
+
+    @Bindable
+    public String getCurrency() {
+        return !TextUtils.isEmpty(productModel.getCurrency()) ? productModel.getCurrency() : "";
+    }
+
+    @Bindable
+    public String getPrice() {
+        return String.valueOf(productModel.getPrice());
+    }
+
+    @Bindable
+    public String getUrl() {
+        return !TextUtils.isEmpty(productModel.getUrl()) ? productModel.getUrl() : "";
     }
 }

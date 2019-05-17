@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.landmark.assignment.R;
-import com.landmark.assignment.model.DataModel;
+import com.landmark.assignment.model.ProductModel;
 import com.landmark.assignment.viewmodel.DataItemViewModel;
 import com.landmark.assignment.databinding.ItemDataBinding;
 
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder> {
     private static final String TAG = "DataAdapter";
-    private List<DataModel> data;
+    private List<ProductModel> data;
 
     public DataAdapter() {
         this.data = new ArrayList<>();
@@ -35,7 +35,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
 
     @Override
     public void onBindViewHolder(DataViewHolder holder, int position) {
-        DataModel dataModel = data.get(position);
+        ProductModel dataModel = data.get(position);
         holder.setViewModel(new DataItemViewModel(dataModel));
     }
 
@@ -56,7 +56,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
         holder.unbind();
     }
 
-    public void updateData(@Nullable List<DataModel> data) {
+    public void updateData(@Nullable List<ProductModel> data) {
         if (data == null || data.isEmpty()) {
             this.data.clear();
         } else {
