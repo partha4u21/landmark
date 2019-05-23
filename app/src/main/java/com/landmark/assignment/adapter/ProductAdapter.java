@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class ProductAdapter extends BaseAdapter {
     private List<APIResponse.Products> listdata;
     private Context context;
 
@@ -32,15 +34,38 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+    public int getCount() {
+        return listdata.size();
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public Object getItem(int position) {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ImageView productImageView = null;
+        TextView productTitle = null;
+        TextView productCurrency = null;
+        TextView productValue = null;
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).
+                    inflate(R.layout.list_item, parent, false);
+        }
+
+        if (convertView != null) {
+            productImageView = (ImageView) convertView.findViewById(R.id.prod_image);
+            productTitle = (TextView) convertView.findViewById(R.id.prod_title);
+            productCurrency = (TextView) convertView.findViewById(R.id.prod_currency);
+            productValue = (TextView) convertView.findViewById(R.id.prod_value);
+        }
+
         final APIResponse.Products mProduct = listdata.get(position);
 
         if (mProduct.getUrl() != null) {
@@ -49,23 +74,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .load(url)
 //                    .placeholder(R.drawable.)
 //                    .transform(new CircleTransform(context))
-                    .into(holder.productImageView);
+                    .into(productImageView);
         } else {
             // make sure Glide doesn't load anything into this view until told otherwise
-            Glide.with(context).clear(holder.productImageView);
+            Glide.with(context).clear(productImageView);
             // remove the placeholder (optional); read comments below
-            holder.productImageView.setImageDrawable(null);
+            productImageView.setImageDrawable(null);
         }
 
-        holder.productTitle.setText(mProduct.getName());
-        holder.productValue.setText(String.valueOf(mProduct.getPrice()));
-        holder.productCurrency.setText(mProduct.getCurrency());
-    }
+        productTitle.setText(mProduct.getName());
+        productValue.setText(String.valueOf(mProduct.getPrice()));
+        productCurrency.setText(mProduct.getCurrency());
 
-
-    @Override
-    public int getItemCount() {
-        return listdata.size();
+        return convertView;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

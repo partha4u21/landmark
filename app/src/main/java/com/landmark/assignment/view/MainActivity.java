@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.GridView;
 
 import com.landmark.assignment.APIResponse;
 import com.landmark.assignment.R;
@@ -29,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         productAdapter = new ProductAdapter(this, new ArrayList<APIResponse.Products>());
-        RecyclerView recyclerView = findViewById(R.id.data_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), VERTICAL));
-        recyclerView.setAdapter(productAdapter);
+//        RecyclerView recyclerView = findViewById(R.id.data_recycler_view);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), VERTICAL));
+//        recyclerView.setAdapter(productAdapter);
+
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(productAdapter);
 
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productViewModel.getProducts().observe(this, (products) -> {
