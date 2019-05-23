@@ -4,20 +4,15 @@ package com.landmark.assignment.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.GridView;
 
-import com.landmark.assignment.APIResponse;
+import com.landmark.assignment.model.APIResponse;
 import com.landmark.assignment.R;
 import com.landmark.assignment.adapter.ProductAdapter;
 import com.landmark.assignment.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
-
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 
 public class MainActivity extends AppCompatActivity {

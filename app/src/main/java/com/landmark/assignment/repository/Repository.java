@@ -1,9 +1,11 @@
-package com.landmark.assignment;
+package com.landmark.assignment.repository;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
-import java.util.List;
+import com.landmark.assignment.api.RestApi;
+import com.landmark.assignment.dao.RestDao;
+import com.landmark.assignment.model.APIResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,6 +1,6 @@
-package com.landmark.assignment;
+package com.landmark.assignment.api;
 
-import java.util.List;
+import com.landmark.assignment.model.APIResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.landmark.assignment.APIResponse;
+import com.landmark.assignment.model.APIResponse;
 import com.landmark.assignment.R;
 
 import java.util.ArrayList;

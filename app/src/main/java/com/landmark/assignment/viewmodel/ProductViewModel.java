@@ -7,10 +7,8 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.landmark.assignment.APIResponse;
-import com.landmark.assignment.Repository;
-
-import java.util.List;
+import com.landmark.assignment.model.APIResponse;
+import com.landmark.assignment.repository.Repository;
 
 
 public class ProductViewModel extends AndroidViewModel {

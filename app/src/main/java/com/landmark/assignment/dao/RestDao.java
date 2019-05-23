@@ -1,4 +1,7 @@
-package com.landmark.assignment;
+package com.landmark.assignment.dao;
+
+import com.landmark.assignment.Constants;
+import com.landmark.assignment.api.RestApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
